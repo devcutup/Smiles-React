@@ -30,7 +30,6 @@ function ArticleEdit(props) {
 
     const handleSave = async () => {
         const payload = { title, content, regions , authors};
-        console.log(payload)
         await editArticle(articleId, payload);
         history.push(ROUTE_ARTICLE_LIST);
     };

@@ -22,7 +22,6 @@ export default {
         }
     },
     create: async (req, res, next) => {
-        console.log(req.body)
         try {
             const article = await Article.create(req.body);
 
@@ -38,7 +37,6 @@ export default {
 
             return res.json(article);
         } catch (err) {
-            console.log("aaaaaaaaaa error")
             next(err);
         }
     },
@@ -55,6 +53,11 @@ export default {
             if (req.body.authors) {
                 await article.setAuthors(req.body.authors.map(({ id }) => id));
                 await article.reload({ include: ['authors', 'regions'] });
+            }
+
+            if (req.body.authors) {
+                await article.setAuthors(req.body.authors.map(({ id }) => id));
+                await article.reload({ include: ['author', 'regions'] });
             }
 
             return res.json(article);
