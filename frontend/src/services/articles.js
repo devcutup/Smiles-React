@@ -7,6 +7,7 @@ export const listArticles = async () => {
 
 export const getArticle = async (articleId) => {
     const response = await api.get(`articles/${articleId}`);
+    console.log(response);
     return response.data;
 };
 
