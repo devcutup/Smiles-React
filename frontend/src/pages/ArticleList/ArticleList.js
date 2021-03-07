@@ -12,8 +12,9 @@ function ArticleList() {
         const fetchArticles = async () => {
             const data = await listArticles();
             setArticles(data);
-        };
 
+            console.log(data)
+        };
         fetchArticles();
     }, []);
 
@@ -24,6 +25,15 @@ function ArticleList() {
             <tr key={ id }>
                 <td>
                     <Link to={ `${ROUTE_ARTICLE_PREFIX}/${id}` }>{ title }</Link>
+                </td>
+                <td>
+                    {
+                        article.authors.map((each, idx) => {
+                            return (
+                                <span key = {idx}>{each.firstName + ' ' + each.lastName } &nbsp;&nbsp;</span>
+                            )
+                        })
+                    }
                 </td>
             </tr>
         );
@@ -39,6 +49,7 @@ function ArticleList() {
                 <thead>
                     <tr>
                         <th>Title</th>
+                        <th>Author</th>
                     </tr>
                 </thead>
                 <tbody>

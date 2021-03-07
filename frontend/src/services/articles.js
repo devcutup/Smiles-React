@@ -16,6 +16,7 @@ export const createArticle = async (payload) => {
 };
 
 export const editArticle = async (articleId, payload) => {
+    console.log(payload)
     const response = await api.put(`articles/${articleId}`, payload);
     return response.data;
 };
