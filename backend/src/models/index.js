@@ -8,6 +8,9 @@ Author.hasMany(Article);
 Article.belongsToMany(Region, { through: 'articles_regions'});
 Region.belongsToMany(Article, { through: 'articles_regions'});
 
+Article.belongsToMany(Author, { through: 'articles_authors'});
+Author.belongsToMany(Article, { through: 'articles_authors'});
+ 
 export default {
     Article,
     Author,

@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { ROUTE_ARTICLE_LIST } from '../../constants';
 import { getArticle, editArticle } from '../../services/articles';
 import RegionDropdown from '../../components/RegionDropdown/RegionDropdown';
+import AuthorDropdown from '../../components/AuthorDropdown/AuthorDropdown';
 
 function ArticleEdit(props) {
     const history = useHistory();
@@ -13,6 +14,7 @@ function ArticleEdit(props) {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [regions, setRegions] = useState([]);
+    const [authors, setAuthors] = useState([]);
 
     useEffect(() => {
         const fetchArticle = async () => {
@@ -20,13 +22,14 @@ function ArticleEdit(props) {
             setTitle(data.title);
             setContent(data.content);
             setRegions(data.regions);
+            setAuthors(data.authors);
         };
 
         fetchArticle();
     }, [articleId]);
 
     const handleSave = async () => {
-        const payload = { title, content, regions };
+        const payload = { title, content, regions , authors};
         await editArticle(articleId, payload);
         history.push(ROUTE_ARTICLE_LIST);
     };
@@ -59,6 +62,13 @@ function ArticleEdit(props) {
                     <RegionDropdown
                         value={ regions }
                         onChange={ (regions) => setRegions(regions) }
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Authors</Form.Label>
+                    <AuthorDropdown
+                        value={ authors }
+                        onChange={ (authors) => setAuthors(authors) }
                     />
                 </Form.Group>
                 <Button variant="primary" onClick={ handleSave }>

@@ -26,7 +26,12 @@ export default {
             const article = await Article.create(req.body);
 
             if (req.body.regions) {
-                await article.setRegions(req.body.regions.map(({ id }) => id));
+                await article.setRegions(req.body.regions.map(({ id }) => id)); 
+                await article.reload({ include: ['author', 'regions'] });
+            }
+
+            if (req.body.authors) {
+                await article.setAuthors(req.body.authors.map(({ id }) => id));
                 await article.reload({ include: ['author', 'regions'] });
             }
 
@@ -42,6 +47,11 @@ export default {
 
             if (req.body.regions) {
                 await article.setRegions(req.body.regions.map(({ id }) => id));
+                await article.reload({ include: ['author', 'regions'] });
+            }
+
+            if (req.body.authors) {
+                await article.setAuthors(req.body.authors.map(({ id }) => id));
                 await article.reload({ include: ['author', 'regions'] });
             }
 
