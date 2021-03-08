@@ -54,12 +54,6 @@ export default {
                 await article.setAuthors(req.body.authors.map(({ id }) => id));
                 await article.reload({ include: ['authors', 'regions'] });
             }
-
-            if (req.body.authors) {
-                await article.setAuthors(req.body.authors.map(({ id }) => id));
-                await article.reload({ include: ['author', 'regions'] });
-            }
-
             return res.json(article);
         } catch (err) {
             next(err);
